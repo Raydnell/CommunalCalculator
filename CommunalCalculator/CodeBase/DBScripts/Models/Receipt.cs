@@ -16,7 +16,8 @@
         public float HotWaterEnergy { get; set; }
         public double HotWaterEnergyCost { get; set; }
         public double FullCost { get; set; }
-        public float Residents { get; set; }
+        public int DayisInPeriod { get; set; }
+        public int StandartModificator { get; set; }
 
         public Receipt()
         {
@@ -33,7 +34,8 @@
             HotWaterEnergy = 0.0f;
             HotWaterEnergyCost = 0.0f;
             FullCost = 0.0f;
-            Residents = 0.0f;
+            DayisInPeriod = 1;
+            StandartModificator = 1;
         }
     }
 }

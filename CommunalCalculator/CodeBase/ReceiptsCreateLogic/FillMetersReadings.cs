@@ -29,7 +29,7 @@ namespace CommunalCalculator.CodeBase.ReceiptsCreateLogic
             }
             else
             {
-                newReceipt.ColdWater = _indicatorsStandart.ColdWater * newReceipt.Residents + oldReceipt.ColdWater;
+                newReceipt.ColdWater = _indicatorsStandart.ColdWater / newReceipt.DayisInPeriod * newReceipt.StandartModificator + oldReceipt.ColdWater;
             }
 
             if (metersCheck[EnumMetersTypes.HotWaterMeter] == true)
@@ -39,8 +39,8 @@ namespace CommunalCalculator.CodeBase.ReceiptsCreateLogic
             }
             else
             {
-                newReceipt.HotWaterAmount = _indicatorsStandart.HotWaterAmount * newReceipt.Residents + oldReceipt.ColdWater;
-                newReceipt.HotWaterEnergy = _indicatorsStandart.HotWaterEnergy * newReceipt.Residents + oldReceipt.HotWaterEnergy;
+                newReceipt.HotWaterAmount = _indicatorsStandart.HotWaterAmount / newReceipt.DayisInPeriod * newReceipt.StandartModificator + oldReceipt.HotWaterAmount;
+                newReceipt.HotWaterEnergy = _indicatorsStandart.HotWaterEnergy / newReceipt.DayisInPeriod * newReceipt.StandartModificator + oldReceipt.HotWaterEnergy;
             }
 
             if (metersCheck[EnumMetersTypes.ElectricityMeter] == true)
@@ -53,7 +53,7 @@ namespace CommunalCalculator.CodeBase.ReceiptsCreateLogic
                 newReceipt.ElectricityDay = oldReceipt.ElectricityDay;
                 newReceipt.ElectricityNight = oldReceipt.ElectricityNight;
 
-                newReceipt.ElectricityStandart = _indicatorsStandart.Electricity * newReceipt.Residents;
+                newReceipt.ElectricityStandart = _indicatorsStandart.Electricity / newReceipt.DayisInPeriod * newReceipt.StandartModificator;
             }
         }
 

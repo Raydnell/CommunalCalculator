@@ -48,7 +48,7 @@ namespace CommunalCalculator.CodeBase.UserInterface
             _indicationsTable.AddColumn("Электричество (без счётчика) (кВт.ч/руб.)");
             _indicationsTable.AddColumn("Элекстричество день (кВт.ч/руб.)");
             _indicationsTable.AddColumn("Элекстричество ночь (кВт.ч/руб.)");
-            _indicationsTable.AddColumn("Жильцов / Итого");
+            _indicationsTable.AddColumn("Итого (руб.)");
         }
 
         private void FillTable()
@@ -70,7 +70,7 @@ namespace CommunalCalculator.CodeBase.UserInterface
                     item.ElectricityStandart.ToString(),
                     item.ElectricityDay.ToString(),
                     item.ElectricityNight.ToString(),
-                    item.Residents.ToString()
+                    "----"
                 );
 
                 _indicationsTable.AddRow(

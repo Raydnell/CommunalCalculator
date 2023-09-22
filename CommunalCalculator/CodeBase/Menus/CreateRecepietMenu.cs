@@ -51,9 +51,7 @@ namespace CommunalCalculator.CodeBase.UserInterface
             }
 
             //указание количества жильцов
-            Console.Clear();
-            Console.WriteLine(Localizations.RussianLocalization[EnumCreateRecepietMenu.HowManyResidents] + "\n");
-            newReceipt.Residents = _residentsSet.HowMuchResidents(Console.ReadLine());
+            _residentsSet.HowMuchResidents(newReceipt);
 
             //указание имеющихся счётчиков
             _checkHasMeters.Check(metersCheck);
@@ -62,25 +60,23 @@ namespace CommunalCalculator.CodeBase.UserInterface
             _fillMetersReadings.Fill(newReceipt, previousReceipt, metersCheck);
 
             //проверка корректности показаний в сравнении с прошлыми показаниями
-            if (_dbCRUD.GetReceiptsDB().Receipts.Count() > 0)
+            if (!_checkMetersReadingCorrect.Check(newReceipt, previousReceipt))
             {
-                if (!_checkMetersReadingCorrect.Check(newReceipt, previousReceipt))
-                {
-                    Console.Clear();
-                    Console.WriteLine(Localizations.RussianLocalization[EnumCreateRecepietMenu.ErrorMetersNotCorrect]);
-                    Console.ReadKey();
-                }
-                else
-                {
-                    //расчёт стоимости услуг
-                    _calculateCost.Calculate(newReceipt, previousReceipt);
+                Console.Clear();
+                Console.WriteLine(Localizations.RussianLocalization[EnumCreateRecepietMenu.ErrorMetersNotCorrect]);
+                Console.ReadKey();
+            }
+            else
+            {
+                //расчёт стоимости услуг
+                _calculateCost.Calculate(newReceipt, previousReceipt);
 
-                    //создание нового элемента в БД
-                    _dbCRUD.Create(newReceipt);
+                //создание нового элемента в БД
+                _dbCRUD.Create(newReceipt);
 
-                    Console.WriteLine(Localizations.RussianLocalization[EnumCreateRecepietMenu.RecepietAdd]);
-                    Console.ReadKey();
-                }
+                Console.Clear();
+                Console.WriteLine(Localizations.RussianLocalization[EnumCreateRecepietMenu.RecepietAdd]);
+                Console.ReadKey();
             }
         }
     }
