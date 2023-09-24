@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using CommunalCalculator.CodeBase.DBScripts.Models;
+using CommunalCalculator.CodeBase.Enums;
+using CommunalCalculator.CodeBase.Localization;
 
 namespace CommunalCalculator.CodeBase.ReceiptsCreateLogic
 {
@@ -16,9 +18,9 @@ namespace CommunalCalculator.CodeBase.ReceiptsCreateLogic
         public void HowMuchResidents(Receipt receipt)
         {
             Console.Clear();
-            Console.WriteLine("Весь период проживало одно количество жильцов или разное?\n(Y - разное, N - одинаковое)");
-            var input = Console.ReadKey();
-            switch (input.Key)
+            Console.WriteLine(Localizations.RussianLocalization[EnumResidentsSet.SameResidentsAllTime]);
+            var inputKey = Console.ReadKey();
+            switch (inputKey.Key)
             {
                 case ConsoleKey.Y:
                     DifferentResidentsInPeriod(receipt);
@@ -39,68 +41,79 @@ namespace CommunalCalculator.CodeBase.ReceiptsCreateLogic
 
         private int HowMuchDaysInPeriod()
         {
+            bool isCorrect;
+            
             Console.Clear();
-            Console.WriteLine("Дальше нужно будет указывать сколько дней сколько человек проживало в квартире, до тех пор, пока не будет заполнена информация по всему расчётному периоду. При неверном вводе будет указан 31 день.\nУкажите длительность расчётного периода\n ");
+            Console.WriteLine(Localizations.RussianLocalization[EnumResidentsSet.ChooseDaysInPeriod]);
             Console.WriteLine("1) 28");
             Console.WriteLine("2) 30");
             Console.WriteLine("3) 31");
 
-            var inputKey = Console.ReadKey();
-            switch (inputKey.Key)
+            isCorrect = false;
+            while (isCorrect == false)
             {
-                case ConsoleKey.D1:
-                    return 28;
+                var inputKey = Console.ReadKey();
+                switch (inputKey.Key)
+                {
+                    case ConsoleKey.D1:
+                        return 28;
 
-                case ConsoleKey.D2:
-                    return 30;
+                    case ConsoleKey.D2:
+                        return 30;
 
-                default:
-                case ConsoleKey.D3:
-                    return 31;
+                    case ConsoleKey.D3:
+                        return 31;
+
+                    default:
+                        Console.Write(Localizations.RussianLocalization[EnumResidentsSet.IncorrectInput]);
+                        Console.ReadKey();
+                        break;
+                }
             }
+
+            return 30;
         }
 
         private void FillDaysAndResidents(Receipt receipt)
         {
             int filledDays = 0;
-            var DaysAndResidents = new List<int[]>();
+            var DaysAndResidents = new List<(int,int)>();
 
             Console.Clear();
-            Console.WriteLine("Далее указывайте по порядку солько дней сколько проживало человек, например 10-1, 2-3, 12-1, 7-4");
-            Console.WriteLine("Ниже будет высвечиваться информация о том, сколько дней уже заполнено");
+            Console.WriteLine(Localizations.RussianLocalization[EnumResidentsSet.HowToSetVariousResidents]);
 
             _isComplete = false;
             while (_isComplete == false)
             {
-                Console.Write("Сколько дней проживало: ");
-                var days = TryParseString(Console.ReadLine());
+                Console.Write(Localizations.RussianLocalization[EnumResidentsSet.ChooseDays]);
+                var days = TryParseString();
                 if (days == -66)
                 {
                     continue;
                 }
                 else if (days + filledDays > receipt.DayisInPeriod)
                 {
-                    Console.WriteLine("Указано больше дней, чем в текущем периоде, повторите попытку");
+                    Console.WriteLine(Localizations.RussianLocalization[EnumResidentsSet.MoreDaysThenPeriod]);
                     Console.ReadKey();
                     continue;
                 }
 
-                Console.Write("Сколько было жильцов в эти дни: ");
-                var residents = TryParseString(Console.ReadLine());
+                Console.Write(Localizations.RussianLocalization[EnumResidentsSet.ChooseResidents]);
+                var residents = TryParseString();
                 if (residents == -66)
                 {
                     continue;
                 }
 
-                DaysAndResidents.Add(new int[] { days, residents });
+                DaysAndResidents.Add(new (days, residents));
 
                 filledDays = 0;
                 foreach (var item in DaysAndResidents)
                 {
-                    filledDays += item[0];
+                    filledDays += item.Item1;
                 }
 
-                Console.WriteLine($"Заполнено {filledDays} из {receipt.DayisInPeriod}");
+                Console.WriteLine($"{Localizations.RussianLocalization[EnumResidentsSet.FilledDays]}{filledDays}/{receipt.DayisInPeriod}");
 
                 if (filledDays == receipt.DayisInPeriod)
                 {
@@ -111,7 +124,7 @@ namespace CommunalCalculator.CodeBase.ReceiptsCreateLogic
             receipt.StandartModificator = 0;
             foreach (var item in DaysAndResidents)
             {
-                receipt.StandartModificator += item[0] * item[1];
+                receipt.StandartModificator += item.Item1 * item.Item2;
             }
         }
 
@@ -123,8 +136,8 @@ namespace CommunalCalculator.CodeBase.ReceiptsCreateLogic
             while (_isComplete == false)
             {
                 Console.Clear();
-                Console.Write("Сколько проживало жильцов: ");
-                receipt.StandartModificator = TryParseString(Console.ReadLine());
+                Console.Write(Localizations.RussianLocalization[EnumResidentsSet.ChooseResidents]);
+                receipt.StandartModificator = TryParseString();
                 
                 if (receipt.StandartModificator != -66)
                 {
@@ -133,19 +146,27 @@ namespace CommunalCalculator.CodeBase.ReceiptsCreateLogic
             }
         }
 
-        private int TryParseString(string input)
+        private int TryParseString()
         {
-            if (int.TryParse(input, out int result))
+            var isCorrect = false;
+            var inputLine = string.Empty;
+
+            while (isCorrect == false)
             {
-                return result;
-            }
-            else
-            {
-                Console.Write("Нужно вводить число");
-                Console.ReadKey();
+                inputLine = Console.ReadLine();
+
+                if (int.TryParse(inputLine, out int result))
+                {
+                    return result;
+                }
+                else
+                {
+                    Console.Write(Localizations.RussianLocalization[EnumResidentsSet.IncorrectInput]);
+                    Console.ReadKey();
+                }
             }
 
-            return -66;
+            return 0;
         }
     }
 }

@@ -21,19 +21,6 @@
 
         public Receipt()
         {
-            ColdWater = 0.0f;
-            ColdWaterCost = 0.0f;
-            ElectricityDay = 0.0f;
-            ElectricityDayCost = 0.0f;
-            ElectricityNight = 0.0f;
-            ElectricityNightCost = 0.0f;
-            ElectricityStandart = 0.0f;
-            ElectricityStandartDayCost = 0.0f;
-            HotWaterAmount = 0.0f;
-            HotWaterAmountCost = 0.0f;
-            HotWaterEnergy = 0.0f;
-            HotWaterEnergyCost = 0.0f;
-            FullCost = 0.0f;
             DayisInPeriod = 1;
             StandartModificator = 1;
         }

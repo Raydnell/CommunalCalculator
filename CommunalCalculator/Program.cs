@@ -1,20 +1,20 @@
 ﻿using System;
 using CommunalCalculator.CodeBase.UserInterface;
+using CommunalCalculator.CodeBase;
 
 namespace CommunalCalculator
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            MainMenu _mainMenu = new MainMenu();
-
-            //StartUpInitialization startUp = new StartUpInitialization();
-            //startUp.CheckConnectionToDB();
+            MainMenu mainMenu = new MainMenu();
+            StartUpInitialization startUp = new StartUpInitialization();
 
             try
             {
-                _mainMenu.SelectPoint();
+                startUp.CheckConnectionToDB();
+                mainMenu.SelectPoint();
             }
             catch (Exception error)
             {

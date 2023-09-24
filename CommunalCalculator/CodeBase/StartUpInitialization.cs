@@ -6,27 +6,17 @@ namespace CommunalCalculator.CodeBase
 {
     class StartUpInitialization
     {
-        private ReceiptsDBContex _indicationsDB;
-
-        public StartUpInitialization()
-        {
-            _indicationsDB = new ReceiptsDBContex();
-        }
-
         public void CheckConnectionToDB()
         {
             Console.Clear();
             
-            if (_indicationsDB.Database.CanConnect())
+            using (ReceiptsDBContex indicationsDB = new ReceiptsDBContex())
             {
-                AnsiConsole.Markup("[underline red]Подключение к БД успешно[/]");
+                if (!indicationsDB.Database.CanConnect())
+                {
+                    throw new Exception("cant connet to DB, check connection");
+                }
             }
-            else
-            {
-                AnsiConsole.Markup("[underline red]Подключение к БД неудачно[/]");
-            }
-
-            Console.ReadKey();
         }
     }
 }

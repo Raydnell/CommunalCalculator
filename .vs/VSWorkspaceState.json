@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\CommunalCalculator",
+    "\\CommunalCalculator\\CodeBase",
+    "\\CommunalCalculator\\CodeBase\\BackgroundInformation",
+    "\\CommunalCalculator\\CodeBase\\CalculationAlgorithms",
+    "\\CommunalCalculator\\CodeBase\\CalculationAlgorithms\\RegulagCostCalculationAlgorithm",
+    "\\CommunalCalculator\\CodeBase\\CalculationAlgorithms\\StandartHotWaterEnergyAlgorithm",
+    "\\CommunalCalculator\\CodeBase\\CalculationAlgorithms\\StandartValueAlgorithm",
+    "\\CommunalCalculator\\CodeBase\\DBScripts",
+    "\\CommunalCalculator\\CodeBase\\Enums"
+  ],
+  "SelectedNode": "\\CommunalCalculator\\Program.cs",
+  "PreviewInSolutionExplorer": false
+}

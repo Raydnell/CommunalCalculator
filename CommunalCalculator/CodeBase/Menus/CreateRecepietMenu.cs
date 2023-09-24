@@ -4,14 +4,14 @@ using System.Linq;
 using CommunalCalculator.CodeBase.Enums;
 using CommunalCalculator.CodeBase.Localization;
 using CommunalCalculator.CodeBase.DBScripts.Models;
-using CommunalCalculator.CodeBase.DBScripts.CRUD;
+using CommunalCalculator.CodeBase.DBScripts.DBOperations;
 using CommunalCalculator.CodeBase.ReceiptsCreateLogic;
 
 namespace CommunalCalculator.CodeBase.UserInterface
 {
     public class CreateRecepietMenu
     {
-        private ICRUD _dbCRUD;
+        private IDBOperations _dbOperations;
         private ResidentsSet _residentsSet;
         private CheckHasMeters _checkHasMeters;
         private FillMetersReadings _fillMetersReadings;
@@ -20,7 +20,7 @@ namespace CommunalCalculator.CodeBase.UserInterface
 
         public CreateRecepietMenu()
         {
-            _dbCRUD = new CRUDSQLite();
+            _dbOperations = new DBOperations();
             _residentsSet = new ResidentsSet();
             _checkHasMeters = new CheckHasMeters();
             _fillMetersReadings = new FillMetersReadings();
@@ -45,9 +45,9 @@ namespace CommunalCalculator.CodeBase.UserInterface
                 EnumMetersTypes.ElectricityMeter
             };
 
-            if (_dbCRUD.GetReceiptsDB().Receipts.Count() > 0)
+            if (_dbOperations.GetReceiptsDB().Receipts.Count() > 0)
             {
-                previousReceipt = _dbCRUD.GetReceiptsDB().Receipts.OrderBy(r => r.Id).Last();
+                previousReceipt = _dbOperations.GetReceiptsDB().Receipts.OrderBy(r => r.Id).Last();
             }
 
             //указание количества жильцов
@@ -72,7 +72,7 @@ namespace CommunalCalculator.CodeBase.UserInterface
                 _calculateCost.Calculate(newReceipt, previousReceipt);
 
                 //создание нового элемента в БД
-                _dbCRUD.Create(newReceipt);
+                _dbOperations.Create(newReceipt);
 
                 Console.Clear();
                 Console.WriteLine(Localizations.RussianLocalization[EnumCreateRecepietMenu.RecepietAdd]);

@@ -16,6 +16,7 @@ namespace CommunalCalculator.CodeBase.ReceiptsCreateLogic
 
         public void Check(Dictionary<Enum, bool> metersChecks)
         {
+            var isCorrect = false;
             var meters = new List<EnumMetersTypes>()
             {
                 EnumMetersTypes.ColdWaterMeter,
@@ -29,15 +30,27 @@ namespace CommunalCalculator.CodeBase.ReceiptsCreateLogic
             foreach (var item in meters)
             {
                 Console.Write($"> {Localizations.RussianLocalization[item]}?");
-                _pressedKey = Console.ReadKey();
-                if (_pressedKey.Key == ConsoleKey.Y)
+
+                isCorrect = false;
+                while (isCorrect == false)
                 {
-                    metersChecks[item] = true;
-                    Console.Write($" - {Localizations.RussianLocalization[EnumCreateRecepietMenu.Yes]}\n");
-                }
-                else
-                {
-                    Console.Write($" - {Localizations.RussianLocalization[EnumCreateRecepietMenu.No]}\n");
+                    _pressedKey = Console.ReadKey();
+                    if (_pressedKey.Key == ConsoleKey.Y)
+                    {
+                        metersChecks[item] = true;
+                        Console.Write($" - {Localizations.RussianLocalization[EnumCreateRecepietMenu.Yes]}\n");
+                        isCorrect = true;
+                    }
+                    else if (_pressedKey.Key == ConsoleKey.N)
+                    {
+                        Console.Write($" - {Localizations.RussianLocalization[EnumCreateRecepietMenu.No]}\n");
+                        isCorrect = true;
+                    }
+                    else
+                    {
+                        Console.Write($" - {Localizations.RussianLocalization[EnumCreateRecepietMenu.InputIncorrect]}\n");
+                    }
+
                 }
             }
 

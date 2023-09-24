@@ -8,6 +8,7 @@
         HowManyResidents,
         SpecifyMetersReadings,
         ErrorMetersNotCorrect,
-        RecepietAdd
+        RecepietAdd,
+        InputIncorrect
     }
 }

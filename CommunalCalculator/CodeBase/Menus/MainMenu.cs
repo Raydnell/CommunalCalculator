@@ -37,7 +37,7 @@ namespace CommunalCalculator.CodeBase.UserInterface
                         break;
 
                     case ConsoleKey.D2:
-                        _viewIndications.ShowIndications();
+                        _viewIndications.ShowReceiptsTable();
                         break;
 
                     case ConsoleKey.D3:

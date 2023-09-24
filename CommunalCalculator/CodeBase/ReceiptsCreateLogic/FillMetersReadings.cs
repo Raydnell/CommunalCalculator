@@ -59,16 +59,28 @@ namespace CommunalCalculator.CodeBase.ReceiptsCreateLogic
 
         private float SpecifyMeter(Enum meterType)
         {
+            var isCorrect = false;
+            var input = string.Empty;
+
             if (Enum.TryParse<EnumMetersTypes>(meterType.ToString(), out EnumMetersTypes result))
             {
                 Console.Clear();
                 Console.WriteLine(Localizations.RussianLocalization[EnumCreateRecepietMenu.SpecifyMetersReadings] + "\n");
                 Console.Write(Localizations.RussianLocalization[result] + ": ");
 
-                var input = Console.ReadLine();
-                if (float.TryParse(input, out float value))
+                while (isCorrect == false)
                 {
-                    return value;
+                    input = Console.ReadLine();
+                    if (float.TryParse(input, out float value))
+                    {
+                        isCorrect = true;
+                        return value;
+                    }
+                    else
+                    {
+                        Console.WriteLine(Localizations.RussianLocalization[EnumCreateRecepietMenu.InputIncorrect]);
+                        Console.ReadKey();
+                    }
                 }
             }
 
