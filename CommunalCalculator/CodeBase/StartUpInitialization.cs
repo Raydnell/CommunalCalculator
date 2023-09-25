@@ -1,6 +1,5 @@
 ﻿using System;
 using CommunalCalculator.CodeBase.DBScripts;
-using Spectre.Console;
 
 namespace CommunalCalculator.CodeBase
 {
@@ -8,13 +7,11 @@ namespace CommunalCalculator.CodeBase
     {
         public void CheckConnectionToDB()
         {
-            Console.Clear();
-            
             using (ReceiptsDBContex indicationsDB = new ReceiptsDBContex())
             {
                 if (!indicationsDB.Database.CanConnect())
                 {
-                    throw new Exception("cant connet to DB, check connection");
+                    throw new Exception("Cant connect to DB, check connection");
                 }
             }
         }

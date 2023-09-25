@@ -2,7 +2,7 @@
 
 namespace CommunalCalculator.CodeBase.DBScripts.DBOperations
 {
-    class DBOperations : IDBOperations
+    public class DBOperations : IDBOperations
     {
         private ReceiptsDBContex _receiptsDB;
 

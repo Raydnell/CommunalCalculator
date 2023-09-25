@@ -970,19 +970,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Raydnell\\.nuget\\packages\\": {}
+    "C:\\Users\\raydnell\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Progaem\\c_sharp\\CommunalCalculator\\CommunalCalculator\\CommunalCalculator.csproj",
+      "projectUniqueName": "C:\\RaydnellFiles\\CSharpProjects\\CommunalCalculator\\CommunalCalculator\\CommunalCalculator.csproj",
       "projectName": "CommunalCalculator",
-      "projectPath": "D:\\Progaem\\c_sharp\\CommunalCalculator\\CommunalCalculator\\CommunalCalculator.csproj",
-      "packagesPath": "C:\\Users\\Raydnell\\.nuget\\packages\\",
-      "outputPath": "D:\\Progaem\\c_sharp\\CommunalCalculator\\CommunalCalculator\\obj\\",
+      "projectPath": "C:\\RaydnellFiles\\CSharpProjects\\CommunalCalculator\\CommunalCalculator\\CommunalCalculator.csproj",
+      "packagesPath": "C:\\Users\\raydnell\\.nuget\\packages\\",
+      "outputPath": "C:\\RaydnellFiles\\CSharpProjects\\CommunalCalculator\\CommunalCalculator\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Raydnell\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\raydnell\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

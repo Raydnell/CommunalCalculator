@@ -2,17 +2,9 @@
 {
     public class IndicatorsStandart
     {
-        public float ColdWater { get; set; }
-        public float Electricity { get; set; }
-        public float HotWaterAmount { get; set; }
-        public float HotWaterEnergy { get; set; }
-
-        public IndicatorsStandart()
-        {
-            ColdWater = 4.85f;
-            Electricity = 164.0f;
-            HotWaterAmount = 4.01f;
-            HotWaterEnergy = 0.05349f;
-        }
+        public static float ColdWater { get { return 4.85f; } private set { } }
+        public static float Electricity { get { return 164.0f; } private set { } }
+        public static float HotWaterAmount { get { return 4.01f; } private set { } }
+        public static float HotWaterEnergy { get { return 0.05349f; } private set { } }
     }
 }

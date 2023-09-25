@@ -76,7 +76,7 @@ namespace CommunalCalculator.CodeBase.ReceiptsCreateLogic
 
         private void FillDaysAndResidents(Receipt receipt)
         {
-            int filledDays = 0;
+            var filledDays = 0;
             var DaysAndResidents = new List<(int,int)>();
 
             Console.Clear();
@@ -87,11 +87,7 @@ namespace CommunalCalculator.CodeBase.ReceiptsCreateLogic
             {
                 Console.Write(Localizations.RussianLocalization[EnumResidentsSet.ChooseDays]);
                 var days = TryParseString();
-                if (days == -66)
-                {
-                    continue;
-                }
-                else if (days + filledDays > receipt.DayisInPeriod)
+                if (days + filledDays > receipt.DayisInPeriod)
                 {
                     Console.WriteLine(Localizations.RussianLocalization[EnumResidentsSet.MoreDaysThenPeriod]);
                     Console.ReadKey();
@@ -100,10 +96,6 @@ namespace CommunalCalculator.CodeBase.ReceiptsCreateLogic
 
                 Console.Write(Localizations.RussianLocalization[EnumResidentsSet.ChooseResidents]);
                 var residents = TryParseString();
-                if (residents == -66)
-                {
-                    continue;
-                }
 
                 DaysAndResidents.Add(new (days, residents));
 
@@ -161,7 +153,7 @@ namespace CommunalCalculator.CodeBase.ReceiptsCreateLogic
                 }
                 else
                 {
-                    Console.Write(Localizations.RussianLocalization[EnumResidentsSet.IncorrectInput]);
+                    Console.WriteLine(Localizations.RussianLocalization[EnumResidentsSet.IncorrectInput]);
                     Console.ReadKey();
                 }
             }

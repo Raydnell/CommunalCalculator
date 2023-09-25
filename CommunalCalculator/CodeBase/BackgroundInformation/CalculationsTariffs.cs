@@ -2,21 +2,11 @@
 {
     public class CalculationsTariffs
     {
-        public float ColdWater { get; set; }
-        public float Electricity { get; set; }
-        public float ElectricityDay { get; set; }
-        public float ElecticityNight { get; set; }
-        public float HotWaterAmount { get; set; }
-        public float HotWaterEnergy { get; set; }
-
-        public CalculationsTariffs()
-        {
-            ColdWater = 35.78f;
-            Electricity = 4.28f;
-            ElectricityDay = 4.9f;
-            ElecticityNight = 2.31f;
-            HotWaterAmount = 35.78f;
-            HotWaterEnergy = 998.69f;
-        }
+        public static float ColdWater { get { return 35.78f; } private set { } }
+        public static float Electricity { get { return 4.28f; } private set { } }
+        public static float ElectricityDay { get { return 4.9f; } private set { } }
+        public static float ElecticityNight { get { return 2.31f; } private set { } }
+        public static float HotWaterAmount { get { return 35.78f; } private set { } }
+        public static float HotWaterEnergy { get { return 998.69f; } private set { } }
     }
 }

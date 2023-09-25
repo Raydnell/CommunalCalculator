@@ -7,13 +7,6 @@ namespace CommunalCalculator.CodeBase.ReceiptsCreateLogic
 {
     public class CheckHasMeters
     {
-        private ConsoleKeyInfo _pressedKey;
-
-        public CheckHasMeters()
-        {
-            _pressedKey = new ConsoleKeyInfo();
-        }
-
         public void Check(Dictionary<Enum, bool> metersChecks)
         {
             var isCorrect = false;
@@ -34,14 +27,14 @@ namespace CommunalCalculator.CodeBase.ReceiptsCreateLogic
                 isCorrect = false;
                 while (isCorrect == false)
                 {
-                    _pressedKey = Console.ReadKey();
-                    if (_pressedKey.Key == ConsoleKey.Y)
+                    var pressedKey = Console.ReadKey();
+                    if (pressedKey.Key == ConsoleKey.Y)
                     {
                         metersChecks[item] = true;
                         Console.Write($" - {Localizations.RussianLocalization[EnumCreateRecepietMenu.Yes]}\n");
                         isCorrect = true;
                     }
-                    else if (_pressedKey.Key == ConsoleKey.N)
+                    else if (pressedKey.Key == ConsoleKey.N)
                     {
                         Console.Write($" - {Localizations.RussianLocalization[EnumCreateRecepietMenu.No]}\n");
                         isCorrect = true;
@@ -49,8 +42,8 @@ namespace CommunalCalculator.CodeBase.ReceiptsCreateLogic
                     else
                     {
                         Console.Write($" - {Localizations.RussianLocalization[EnumCreateRecepietMenu.InputIncorrect]}\n");
+                        Console.ReadKey();
                     }
-
                 }
             }
 

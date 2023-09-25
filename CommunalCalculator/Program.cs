@@ -19,10 +19,8 @@ namespace CommunalCalculator
             catch (Exception error)
             {
                 Console.Clear();
-                Console.WriteLine("Some error happen, restart program.");
-                Console.WriteLine("\nError message:\n");
-                Console.WriteLine(error);
-                Console.ReadLine();
+                Console.WriteLine($"Some error happen, restart program.\nError message: {error}");
+                Console.ReadKey();
             }
         }
     }

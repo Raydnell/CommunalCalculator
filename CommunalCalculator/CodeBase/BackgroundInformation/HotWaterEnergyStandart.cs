@@ -2,11 +2,6 @@
 {
     public class HotWaterEnergyStandart
     {
-        public float HotWaterEnergy { get; set; }
-
-        public HotWaterEnergyStandart()
-        {
-            HotWaterEnergy = 0.01334f;
-        }
+        public static float HotWaterEnergy { get { return 0.01334f; } private set { } }
     }
 }

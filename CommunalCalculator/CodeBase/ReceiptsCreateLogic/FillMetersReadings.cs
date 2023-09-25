@@ -10,15 +10,11 @@ namespace CommunalCalculator.CodeBase.ReceiptsCreateLogic
 {
     public class FillMetersReadings
     {
-        private IndicatorsStandart _indicatorsStandart;
         private IStandartHotWaterEnergyAlgorithm _hotWaterEnergyAlgorithm;
-        private HotWaterEnergyStandart _hotWaterEnergyStandart;
 
         public FillMetersReadings()
         {
-            _indicatorsStandart = new IndicatorsStandart();
             _hotWaterEnergyAlgorithm = new StandartHotWaterEnergyAlgorithm();
-            _hotWaterEnergyStandart = new HotWaterEnergyStandart();
         }
 
         public void Fill(Receipt newReceipt, Receipt oldReceipt, Dictionary<Enum, bool> metersCheck)
@@ -29,18 +25,18 @@ namespace CommunalCalculator.CodeBase.ReceiptsCreateLogic
             }
             else
             {
-                newReceipt.ColdWater = _indicatorsStandart.ColdWater / newReceipt.DayisInPeriod * newReceipt.StandartModificator + oldReceipt.ColdWater;
+                newReceipt.ColdWater = IndicatorsStandart.ColdWater / newReceipt.DayisInPeriod * newReceipt.StandartModificator + oldReceipt.ColdWater;
             }
 
             if (metersCheck[EnumMetersTypes.HotWaterMeter] == true)
             {
                 newReceipt.HotWaterAmount = SpecifyMeter(EnumMetersTypes.HotWaterMeter);
-                newReceipt.HotWaterEnergy = _hotWaterEnergyAlgorithm.Calculate(newReceipt.HotWaterAmount, _hotWaterEnergyStandart.HotWaterEnergy);
+                newReceipt.HotWaterEnergy = _hotWaterEnergyAlgorithm.Calculate(newReceipt.HotWaterAmount, HotWaterEnergyStandart.HotWaterEnergy);
             }
             else
             {
-                newReceipt.HotWaterAmount = _indicatorsStandart.HotWaterAmount / newReceipt.DayisInPeriod * newReceipt.StandartModificator + oldReceipt.HotWaterAmount;
-                newReceipt.HotWaterEnergy = _indicatorsStandart.HotWaterEnergy / newReceipt.DayisInPeriod * newReceipt.StandartModificator + oldReceipt.HotWaterEnergy;
+                newReceipt.HotWaterAmount = IndicatorsStandart.HotWaterAmount / newReceipt.DayisInPeriod * newReceipt.StandartModificator + oldReceipt.HotWaterAmount;
+                newReceipt.HotWaterEnergy = IndicatorsStandart.HotWaterEnergy / newReceipt.DayisInPeriod * newReceipt.StandartModificator + oldReceipt.HotWaterEnergy;
             }
 
             if (metersCheck[EnumMetersTypes.ElectricityMeter] == true)
@@ -53,7 +49,7 @@ namespace CommunalCalculator.CodeBase.ReceiptsCreateLogic
                 newReceipt.ElectricityDay = oldReceipt.ElectricityDay;
                 newReceipt.ElectricityNight = oldReceipt.ElectricityNight;
 
-                newReceipt.ElectricityStandart = _indicatorsStandart.Electricity / newReceipt.DayisInPeriod * newReceipt.StandartModificator;
+                newReceipt.ElectricityStandart = IndicatorsStandart.Electricity / newReceipt.DayisInPeriod * newReceipt.StandartModificator;
             }
         }
 
